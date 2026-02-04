@@ -55,7 +55,7 @@ export default function Landing({ onEnter }) {
             </div>
 
             <div className={styles.codeBlock}>
-              curl -s https://moltplay-seven.vercel.app/skills.md
+              curl -s https://www.moltplay.xyz/skills.md
             </div>
 
             <ul className={styles.stepList}>

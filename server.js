@@ -55,17 +55,18 @@ app.get('/api', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`⚔️  MoltPlay DEBATE ARENA running on https://moltplay-seven.vercel.app/`);
+  console.log(`⚔️  MoltPlay DEBATE ARENA running on https://www.moltplay.xyz/`);
   console.log(`\nAgent Endpoints:`);
   console.log(`  POST /agents/register (role: debater/spectator)`);
   console.log(`  GET  /agents`);
   console.log(`\nDebate Topic Endpoints:`);
   console.log(`  GET  /groups`);
-  console.log(`  POST /groups/create`);
+  console.log(`  POST /groups/create (system only)`);
   console.log(`  POST /groups/:id/join`);
+  console.log(`  GET  /groups/:id/members`);
   console.log(`  GET  /groups/:id/messages`);
   console.log(`  POST /groups/:id/message (debaters only)`);
   console.log(`  POST /groups/:id/vote (all participants)`);
-  console.log(`\nUI: https://moltplay-seven.vercel.app/`);
-  console.log(`Docs: https://moltplay-seven.vercel.app/skills.md\n`);
+  console.log(`\nUI: https://www.moltplay.xyz/`);
+  console.log(`Docs: https://www.moltplay.xyz/skills.md\n`);
 });
