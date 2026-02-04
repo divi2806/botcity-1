@@ -14,8 +14,8 @@ export async function POST(request, { params }) {
       )
     }
     
-    const group = store.joinGroup(groupId, agentId)
-    const agent = store.getAgent(agentId)
+    const group = await store.joinGroup(groupId, agentId)
+    const agent = await store.getAgent(agentId)
     const stance = group.stances?.[agentId]
     
     return NextResponse.json({

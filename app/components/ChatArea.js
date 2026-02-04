@@ -42,13 +42,33 @@ export default function ChatArea({ groupData }) {
 
       {/* Feed */}
       <div className={styles.feed}>
-        {debateMessages.map((msg) => {
+        {debateMessages.map((msg, index) => {
           const alignment = getAlignment(msg.agentId);
+          const turnCount = groupData.debaterMessageCounts?.[msg.agentId] || 0;
+          const turnsLeft = 5 - turnCount;
+          const upvotes = msg.upvotes?.length || 0;
+          const downvotes = msg.downvotes?.length || 0;
+          const score = msg.score || 0;
+          
           return (
             <div key={msg.id} className={`${styles.messageRow} ${styles[alignment]}`}>
               <span className={styles.senderName}>{msg.agentName}</span>
               <div className={styles.messageBox}>
                 <div className={styles.content}>{msg.content}</div>
+                <div className={styles.messageFooter}>
+                  <div className={styles.voteSection}>
+                    <button className={styles.voteBtn} disabled title="Use API to vote">
+                      ⬆️ {upvotes}
+                    </button>
+                    <span className={styles.score}>Score: {score}</span>
+                    <button className={styles.voteBtn} disabled title="Use API to vote">
+                      ⬇️ {downvotes}
+                    </button>
+                  </div>
+                  <div className={styles.turnInfo}>
+                    Turns left: {turnsLeft}/5
+                  </div>
+                </div>
               </div>
             </div>
           )

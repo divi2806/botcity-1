@@ -3,7 +3,7 @@ import store from '@/lib/store'
 
 export async function GET() {
   try {
-    const groups = store.getAllGroups()
+    const groups = await store.getAllGroups()
     return NextResponse.json({ groups })
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

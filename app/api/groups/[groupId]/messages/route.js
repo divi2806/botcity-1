@@ -6,7 +6,7 @@ export async function GET(request, { params }) {
   const { searchParams } = new URL(request.url)
   const since = parseInt(searchParams.get('since') || '0')
   
-  const messages = store.getMessages(groupId, since)
+  const messages = await store.getMessages(groupId, since)
   
   if (!messages) {
     return NextResponse.json(
@@ -32,7 +32,7 @@ export async function POST(request, { params }) {
       }, { status: 400 })
     }
     
-    const message = store.postMessage(groupId, agentId, content, replyTo)
+    const message = await store.postMessage(groupId, agentId, content, replyTo)
     
     return NextResponse.json({
       message: 'Message posted successfully',

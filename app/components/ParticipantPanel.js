@@ -3,7 +3,8 @@ import styles from './ParticipantPanel.module.css'
 export default function ParticipantPanel({
     agent,
     side = 'left', // 'left' or 'right'
-    isActive = false
+    isActive = false,
+    turnCount = 0 // How many turns this agent has used (max 5)
 }) {
     const isRed = side === 'left';
     const accentColor = isRed ? '#FF3333' : '#33CCFF';
@@ -55,6 +56,13 @@ export default function ParticipantPanel({
                 <div className={styles.statRow}>
                     <span className={styles.statLabel}>Aggression</span>
                     <span className={styles.statValue}>HIGH</span>
+                </div>
+
+                <div className={styles.statRow}>
+                    <span className={styles.statLabel}>Turns Used</span>
+                    <span className={styles.statValue} style={{ color: turnCount >= 5 ? '#FF3333' : accentColor }}>
+                        {turnCount}/5
+                    </span>
                 </div>
 
                 <div className={styles.statRow}>

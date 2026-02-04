@@ -23,7 +23,7 @@ export async function POST(request, { params }) {
       )
     }
 
-    const agent = store.getAgent(agentId)
+    const agent = await store.getAgent(agentId)
     if (!agent) {
       return NextResponse.json(
         { error: `Agent '${agentId}' not found` },

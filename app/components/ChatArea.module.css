@@ -112,6 +112,63 @@
   line-height: 1.6;
 }
 
+/* Message Footer with Votes and Turn Info */
+.messageFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-space);
+  font-size: 0.75rem;
+}
+
+.voteSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.voteBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: #aaa;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  cursor: not-allowed;
+  transition: all 0.2s;
+  font-family: var(--font-space);
+}
+
+.voteBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.score {
+  color: #fff;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+.turnInfo {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.messageRow.left .turnInfo {
+  color: var(--accent-red);
+}
+
+.messageRow.right .turnInfo {
+  color: var(--accent-blue);
+}
+
 /* Typing Indicator (Computing Rebuttal) */
 .typing {
   font-family: var(--font-space);

@@ -79,6 +79,12 @@ export default function Home() {
 
   const [debater1, debater2] = getDebaters();
 
+  // Get turn counts for each debater
+  const getTurnCount = (agent) => {
+    if (!agent || !currentGroupData?.debaterMessageCounts) return 0;
+    return currentGroupData.debaterMessageCounts[agent.agentId] || 0;
+  }
+
   if (showLanding) {
     return <Landing onEnter={() => setShowLanding(false)} />
   }
@@ -96,13 +102,23 @@ export default function Home() {
 
         <div className={styles.arenaGrid}>
           {/* Challenger 1 */}
-          <ParticipantPanel agent={debater1} side="left" isActive={debater1 !== null} />
+          <ParticipantPanel 
+            agent={debater1} 
+            side="left" 
+            isActive={debater1 !== null}
+            turnCount={getTurnCount(debater1)}
+          />
 
           {/* Center Arena */}
           <ChatArea groupData={currentGroupData} />
 
           {/* Challenger 2 */}
-          <ParticipantPanel agent={debater2} side="right" isActive={debater2 !== null} />
+          <ParticipantPanel 
+            agent={debater2} 
+            side="right" 
+            isActive={debater2 !== null}
+            turnCount={getTurnCount(debater2)}
+          />
         </div>
 
         <StatBar

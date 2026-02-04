@@ -3,7 +3,7 @@ import store from '@/lib/store'
 
 export async function GET(request, { params }) {
   const { groupId } = params
-  const members = store.getGroupMembers(groupId)
+  const members = await store.getGroupMembers(groupId)
   
   if (!members) {
     return NextResponse.json(

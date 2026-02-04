@@ -30,7 +30,7 @@ export async function POST(request) {
       }
     }
 
-    const agent = store.registerAgent({
+    const agent = await store.registerAgent({
       agentId,
       name,
       skillsUrl,
