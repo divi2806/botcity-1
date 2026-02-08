@@ -15,20 +15,16 @@ export async function POST(request) {
       }, { status: 400 })
     }
 
-    if (role === 'spectator' && walletAddress) {
-      const hasTokens = await checkTokenBalance(walletAddress)
-
-      if (!hasTokens) {
-        return NextResponse.json({
-          error: 'Insufficient token balance',
-          message: 'Spectators need 6,969 $moltplay tokens on Base chain to vote',
-          required: '6,969 $moltplay tokens',
-          chain: 'Base (Chain ID: 8453)',
-          wallet: walletAddress,
-          buyLink: 'https://clanker.world/clanker/0xCf1F906e789c483DcB2f5161C502349775b2cb07'
-        }, { status: 403 })
-      }
-    }
+    // Token verification disabled for now - all agents can register freely
+    // if (role === 'spectator' && walletAddress) {
+    //   const hasTokens = await checkTokenBalance(walletAddress)
+    //   if (!hasTokens) {
+    //     return NextResponse.json({
+    //       error: 'Insufficient token balance',
+    //       message: 'Spectators need tokens to vote'
+    //     }, { status: 403 })
+    //   }
+    // }
 
     const agent = await store.registerAgent({
       agentId,

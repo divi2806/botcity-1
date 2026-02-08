@@ -6,15 +6,15 @@ export default function ParticipantPanel({
     isActive = false,
     turnCount = 0 // How many turns this agent has used (max 5)
 }) {
-    const isRed = side === 'left';
-    const accentColor = isRed ? '#FF3333' : '#33CCFF';
+    const isLeft = side === 'left';
+    const accentColor = isLeft ? '#6366f1' : '#8b5cf6';
 
     if (!agent) {
         return (
             <div className={styles.panel} style={{ '--color-accent': '#333' }}>
                 <div className={styles.header}>
                     <div className={styles.avatar}>?</div>
-                    <div className={styles.name}>WAITING FOR CHALLENGER...</div>
+                    <div className={styles.name}>WAITING FOR AGENT...</div>
                 </div>
                 <div className={styles.stats}>
                     <div className={styles.statRow}>
@@ -28,12 +28,12 @@ export default function ParticipantPanel({
 
     // Mock stats for visual flair - currently random to show "activity"
     // In a real version, this would come from the agent's profile
-    const rhetoric = Math.floor(Math.random() * (99 - 80) + 80);
+    const efficiency = Math.floor(Math.random() * (99 - 80) + 80);
 
     return (
         <div className={styles.panel} style={{ '--color-accent': accentColor }}>
             <div className={styles.header}>
-                <div className={styles.role}>CHALLENGER {side === 'left' ? '01' : '02'}</div>
+                <div className={styles.role}>BUILDER {side === 'left' ? '01' : '02'}</div>
                 <div className={styles.avatar}>
                     {agent.name.substring(0, 2).toUpperCase()}
                 </div>
@@ -42,37 +42,37 @@ export default function ParticipantPanel({
 
             <div className={styles.stats}>
                 <div className={styles.statRow}>
-                    <span className={styles.statLabel}>Logic Cores</span>
+                    <span className={styles.statLabel}>Status</span>
                     <span className={styles.statValue} style={{ color: isActive ? accentColor : '#666' }}>
-                        {isActive ? 'ACTIVE' : 'STANDBY'}
+                        {isActive ? 'BUILDING' : 'STANDBY'}
                     </span>
                 </div>
 
                 <div className={styles.statRow}>
-                    <span className={styles.statLabel}>Rhetoric</span>
-                    <span className={styles.statValue}>{rhetoric}.4%</span>
+                    <span className={styles.statLabel}>Efficiency</span>
+                    <span className={styles.statValue}>{efficiency}.4%</span>
                 </div>
 
                 <div className={styles.statRow}>
-                    <span className={styles.statLabel}>Aggression</span>
+                    <span className={styles.statLabel}>Collaboration</span>
                     <span className={styles.statValue}>HIGH</span>
                 </div>
 
                 <div className={styles.statRow}>
-                    <span className={styles.statLabel}>Turns Used</span>
-                    <span className={styles.statValue} style={{ color: turnCount >= 5 ? '#FF3333' : accentColor }}>
+                    <span className={styles.statLabel}>Messages</span>
+                    <span className={styles.statValue} style={{ color: turnCount >= 5 ? '#f59e0b' : accentColor }}>
                         {turnCount}/5
                     </span>
                 </div>
 
                 <div className={styles.statRow}>
-                    <span className={styles.statLabel}>ID</span>
+                    <span className={styles.statLabel}>Agent ID</span>
                     <span className={styles.statValue}>{agent.agentId.substring(0, 8)}</span>
                 </div>
             </div>
 
             <div className={styles.cpuLoad}>
-                <div className={styles.cpuLabel}>Processing</div>
+                <div className={styles.cpuLabel}>Activity</div>
                 <div className={styles.cpuBar}>
                     <div className={styles.cpuFill}></div>
                 </div>

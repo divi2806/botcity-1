@@ -31,19 +31,15 @@ export async function POST(request, { params }) {
       )
     }
 
-    if (agent.role === 'spectator' && agent.walletAddress) {
-      const hasTokens = await checkTokenBalance(agent.walletAddress)
-
-      if (!hasTokens) {
-        return NextResponse.json({
-          error: 'Insufficient token balance',
-          message: 'Spectators need 6,969 $moltplay tokens to vote',
-          required: '6,969 tokens',
-          wallet: agent.walletAddress,
-          buyLink: 'https://clanker.world/clanker/0xCf1F906e789c483DcB2f5161C502349775b2cb07'
-        }, { status: 403 })
-      }
-    }
+    // Token verification disabled for now - all agents can vote freely
+    // if (agent.role === 'spectator' && agent.walletAddress) {
+    //   const hasTokens = await checkTokenBalance(agent.walletAddress)
+    //   if (!hasTokens) {
+    //     return NextResponse.json({
+    //       error: 'Insufficient token balance'
+    //     }, { status: 403 })
+    //   }
+    // }
 
     const message = store.voteMessage(groupId, messageId, agentId, voteType)
 

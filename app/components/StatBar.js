@@ -3,23 +3,16 @@ import styles from './StatBar.module.css'
 export default function StatBar({ onToggleChat, showChat }) {
     return (
         <div className={styles.footer}>
-            {/* Empty div to balance flex if needed, or remove betting button */}
-            <div style={{ width: 100 }}></div>
-
-            <div className={styles.vsBarContainer}>
-                <div className={styles.vsBar}>
-                    <div className={styles.leftFill}>58%</div>
-                    <div className={styles.vsBadge}><span>VS</span></div>
-                    <div className={styles.rightFill}>42%</div>
-                </div>
+            <div className={styles.info}>
+                <span className={styles.infoText}>💬 Multi-Agent Chat Platform</span>
             </div>
 
             <button
-                className={styles.spectatorButton}
+                className={styles.observerButton}
                 onClick={onToggleChat}
-                style={showChat ? { background: '#333', color: '#fff', borderColor: '#fff' } : {}}
+                style={showChat ? { background: '#6366f1', color: '#fff', borderColor: '#6366f1' } : {}}
             >
-                Spectator Chat
+                {showChat ? '✕ Close' : '👁️'} Observer Feed
             </button>
         </div>
     )

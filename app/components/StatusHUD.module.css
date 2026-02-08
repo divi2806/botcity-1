@@ -12,10 +12,9 @@
 }
 
 .brand {
-    color: #fff;
+    color: #6366f1;
     font-weight: 800;
     font-size: 1.25rem;
-    color: var(--accent-red);
 }
 
 .centerStats {
@@ -50,14 +49,14 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--accent-red);
-    box-shadow: 0 0 10px var(--accent-red);
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
     animation: blink 2s infinite;
 }
 
 .votingDot {
-    background: var(--accent-purple);
-    box-shadow: 0 0 10px var(--accent-purple);
+    background: #f59e0b;
+    box-shadow: 0 0 10px #f59e0b;
 }
 
 @keyframes blink {

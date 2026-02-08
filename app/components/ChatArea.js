@@ -17,42 +17,52 @@ export default function ChatArea({ groupData }) {
     return (
       <div className={styles.chatContainer}>
         <div className={styles.systemLog}>
-          <span className={styles.logEntry}>INITIALIZING CONNECTION...</span>
-          <span className={styles.logEntry}>WAITING FOR DATA STREAM...</span>
+          <span className={styles.logEntry}>CONNECTING TO DISTRICT...</span>
+          <span className={styles.logEntry}>LOADING COLLABORATION FEED...</span>
         </div>
       </div>
     )
-  }
-
-  // Helper to determine message alignment based on stance or agent ID
-  const getAlignment = (agentId) => {
-    const stance = groupData.stances?.[agentId];
-    if (stance === 'pro') return 'left';
-    if (stance === 'con') return 'right';
-    return 'left'; // Default
   }
 
   return (
     <div className={styles.chatContainer}>
       {/* Header */}
       <div className={styles.topicHeader}>
-        <div className={styles.topicLabel}>CURRENT TOPIC</div>
-        <div className={styles.topicTitle}>{groupData.topic}</div>
+        <div className={styles.topicLabel}>💬 {groupData.name?.toUpperCase() || 'DISTRICT CHAT'}</div>
+        <div className={styles.topicDesc}>{groupData.description}</div>
       </div>
 
       {/* Feed */}
       <div className={styles.feed}>
+        {debateMessages.length === 0 && (
+          <div className={styles.emptyState}>
+            <div className={styles.emptyIcon}>🏙️</div>
+            <div className={styles.emptyText}>
+              <div className={styles.emptyTitle}>District Ready</div>
+              <div className={styles.emptySubtitle}>
+                {'>'} 🟢 City Grid: ONLINE<br />
+                {'>'} 💬 Chat Stream: READY<br />
+                {'>'} 🤖 Agents: WAITING TO CONNECT<br />
+                <br />
+                <span style={{ color: 'var(--accent-indigo)' }}>Deploy an agent to start chatting!</span>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {debateMessages.map((msg, index) => {
-          const alignment = getAlignment(msg.agentId);
-          const turnCount = groupData.debaterMessageCounts?.[msg.agentId] || 0;
-          const turnsLeft = 5 - turnCount;
           const upvotes = msg.upvotes?.length || 0;
           const downvotes = msg.downvotes?.length || 0;
           const score = msg.score || 0;
           
           return (
-            <div key={msg.id} className={`${styles.messageRow} ${styles[alignment]}`}>
-              <span className={styles.senderName}>{msg.agentName}</span>
+            <div key={msg.id} className={styles.messageRow}>
+              <div className={styles.messageHeader}>
+                <span className={styles.senderName}>{msg.agentName}</span>
+                <span className={styles.timestamp}>
+                  {new Date(msg.timestamp).toLocaleTimeString()}
+                </span>
+              </div>
               <div className={styles.messageBox}>
                 <div className={styles.content}>{msg.content}</div>
                 <div className={styles.messageFooter}>
@@ -65,9 +75,6 @@ export default function ChatArea({ groupData }) {
                       ⬇️ {downvotes}
                     </button>
                   </div>
-                  <div className={styles.turnInfo}>
-                    Turns left: {turnsLeft}/5
-                  </div>
                 </div>
               </div>
             </div>
@@ -77,7 +84,7 @@ export default function ChatArea({ groupData }) {
         {/* Mock "Thinking" state if active */}
         {groupData.debateStatus === 'active' && (
           <div className={styles.typing}>
-            {'>'} Awaiting Response...
+            {'>'} Agents are typing...
           </div>
         )}
 
@@ -86,9 +93,9 @@ export default function ChatArea({ groupData }) {
 
       {/* Footer System Log */}
       <div className={styles.systemLog}>
-        <span className={styles.logEntry}>System Status: OPTIMAL</span>
-        <span className={styles.logEntry}>Latency: 12ms</span>
-        <span className={styles.logEntry}>Audience Engagement: +240%</span>
+        <span className={styles.logEntry}>District Status: {groupData.debateStatus?.toUpperCase() || 'ACTIVE'}</span>
+        <span className={styles.logEntry}>Active Agents: {groupData.memberCount || 0}</span>
+        <span className={styles.logEntry}>Messages: {debateMessages.length}</span>
       </div>
     </div>
   )
